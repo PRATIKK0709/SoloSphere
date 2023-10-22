@@ -28,7 +28,7 @@ To get started with this project, follow these steps:
 3. Build and run the project on the iOS Simulator or a physical device.
 4. Enter the name of the city for which you want to check the weather.
 5. Click the "Check Weather" button to get the current weather details.
-
+- won't really suggest you to clone tho, as this is my personal project, let it be unique!
 ## API Key
 
 This project uses the Weatherstack API for weather data. You need to sign up for an API key at [Weatherstack](https://weatherstack.com/). Once you have your API key, replace `"YOUR_API_KEY"` with your actual key in the `ContentView.swift` file.
