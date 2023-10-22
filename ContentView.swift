@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var weatherData: WeatherData?
     @State private var isFetchingData = false
 
-    let apiKey = "bb5c41560410d64f4c11e980135d4dd5"
+    let apiKey = "your api key here"
 
     struct WeatherData: Codable {
         var location: Location
