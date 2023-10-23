@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var weatherData: WeatherData?
     @State private var isFetchingData = false
 
-    let apiKey = "your api key here"
+    let apiKey = "your api key"
 
     struct WeatherData: Codable {
         var location: Location
@@ -52,13 +52,45 @@ struct ContentView: View {
         }
     }
 
+    struct GlassButton: View {
+        var label: String
+        var action: () -> Void
+
+        var body: some View {
+            Button(action: action) {
+                Text(label)
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(BlurView(style: .systemThinMaterial))
+                    .cornerRadius(10)
+                    .opacity(0.8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.white, lineWidth: 1)
+                    )
+            }
+        }
+    }
+
+    struct BlurView: UIViewRepresentable {
+        let style: UIBlurEffect.Style
+
+        func makeUIView(context: Context) -> UIVisualEffectView {
+            let view = UIVisualEffectView(effect: UIBlurEffect(style: style))
+            return view
+        }
+
+        func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        }
+    }
+
     var body: some View {
         NavigationView {
             ZStack {
                 backgroundForTemperature(weatherData?.current.temperature)
-                
+
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .center, spacing: 20) { // Center alignment
                         Text("SolaceSphere")
                             .font(.largeTitle)
                             .foregroundColor(.white)
@@ -93,16 +125,14 @@ struct ContentView: View {
                             WeatherRow(title: "Visibility:", value: "\(visibility) km")
                         }
 
-                        Button(action: {
-                            fetchWeatherData()
-                        }) {
-                            Text("Check Weather")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
+                        GeometryReader { geometry in
+                            GlassButton(label: "Check") {
+                                fetchWeatherData()
+                            }
+                            .disabled(isFetchingData)
+                            .frame(width: 100, height: 30)
+                            .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                         }
-                        .disabled(isFetchingData)
 
                         if isFetchingData {
                             ProgressView()
@@ -115,7 +145,7 @@ struct ContentView: View {
             .navigationBarTitle("", displayMode: .inline)
         }
     }
-    
+
     private func backgroundForTemperature(_ temperature: Int?) -> some View {
         let gradientBackground: LinearGradient
 
@@ -150,7 +180,7 @@ struct ContentView: View {
         return gradientBackground
             .edgesIgnoringSafeArea(.all)
     }
-    
+
     private func fetchWeatherData() {
         guard !city.isEmpty else { return }
 
@@ -184,7 +214,7 @@ struct ContentView: View {
 struct WeatherRow: View {
     var title: String
     var value: String
-    
+
     var body: some View {
         HStack {
             Text(title)
