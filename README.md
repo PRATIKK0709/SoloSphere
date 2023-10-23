@@ -3,7 +3,7 @@
 
 SolaceSphere is a simple weather app that allows you to check the current weather in different cities. You can enter a city name, and it will provide you with the temperature, conditions, and additional weather information.
 
-![Uploading Simulator Screenshot - iPhone 15 Pro - 2023-10-23 at 16.50.34.png…]()
+![ss](https://cdn.discordapp.com/attachments/929653900812886076/1165973129634525184/simulator_screenshot_AA4F1953-0F9D-413F-AC18-6C9A5B513223.png?ex=6548cc18&is=65365718&hm=69b46de2428d4edabe77cffcbad62efcfc7fb9a181a7c96f7fe09f43679ac26d&)
 
 
 
